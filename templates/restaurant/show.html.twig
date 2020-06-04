@@ -3,7 +3,16 @@
 {% block title %}Restaurant{% endblock %}
 
 {% block body %}
-    <h1>Restaurant</h1>
+    <h1>{{ restaurant.name }}</h1>
+
+    <h2>
+        {% if restaurant.averageRating is not null %}
+            (moyenne de {{ restaurant.averageRating | round(1) }}/5)
+            {% else %}
+                <small>Ce restaurant n'a pas encore de note. Soyez les premiers à laisser un avis !</small>
+        {% endif %}
+    </h2>
+
 
     <table class="table">
         <tbody>
@@ -16,11 +25,24 @@
                 <td>{{ restaurant.name }}</td>
             </tr>
             <tr>
+                <th>Ville</th>
+                <td>
+                    <a href="{{ path('city_show', {'id': restaurant.city.id }) }}">{{ restaurant.city.name }}</a>
+                </td>
+            </tr>
+            <tr>
                 <th>Description</th>
                 <td>{{ restaurant.description }}</td>
             </tr>
         </tbody>
     </table>
+
+    {% for review in restaurant.reviews %}
+        <div class="card mt-2">
+            <div class="card-header"><span class="badge badge-success">{{review.rating}}/5</span> {{ review.name }}</div>
+            <div class="card-body">{{ review.content }}</div>
+        </div>
+    {% endfor %}
 
     <a href="{{ path('restaurant_index') }}">back to list</a>
 

@@ -11,6 +11,7 @@
                 <th>Id</th>
                 <th>Name</th>
                 <th>Zipcode</th>
+                <th>Nombre de restos</th>
                 <th>actions</th>
             </tr>
         </thead>
@@ -20,6 +21,7 @@
                 <td>{{ city.id }}</td>
                 <td>{{ city.name }}</td>
                 <td>{{ city.zipcode }}</td>
+                <td> {{ city.restaurants | length }}</td>
                 <td>
                     <a href="{{ path('city_show', {'id': city.id}) }}">show</a>
                     <a href="{{ path('city_edit', {'id': city.id}) }}">edit</a>

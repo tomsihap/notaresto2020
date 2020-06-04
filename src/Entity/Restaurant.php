@@ -134,4 +134,22 @@ class Restaurant
 
         return $this;
     }
+
+    public function getAverageRating() {
+
+        $reviews = $this->getReviews();
+        $ratingSum = 0;
+        $ratingCount = 0;
+
+        foreach ($reviews as $review) {
+            $ratingSum += $review->getRating();
+            $ratingCount++;
+        }
+
+        if ($ratingCount > 0) {
+            return $ratingSum / $ratingCount;
+        }
+
+        return null;
+    }
 }

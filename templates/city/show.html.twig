@@ -22,6 +22,21 @@
         </tbody>
     </table>
 
+    {% for restaurant in city.restaurants %}
+        <div class="card mt-2">
+            <div class="card-header">
+                <a href="{{ path('restaurant_show', { 'id': restaurant.id }) }}">{{ restaurant.name }}</a>
+                <span class="badge badge-primary">{{ restaurant.reviews | length }} avis</span>
+
+            </div>
+            <div class="card-body">
+            <small>{{ restaurant.description }}</small>
+            </div>
+        </div>
+
+    {% endfor %}
+
+
     <a href="{{ path('city_index') }}">back to list</a>
 
     <a href="{{ path('city_edit', {'id': city.id}) }}">edit</a>
