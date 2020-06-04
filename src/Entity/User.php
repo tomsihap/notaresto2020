@@ -195,4 +195,29 @@ class User implements UserInterface
 
         return $this;
     }
+
+    public function getHumanRole() {
+        $roles = $this->getRoles();
+
+        /**
+         * Si on utilise plusieurs rôles, et qu'on a besoin d'un tableau de rôles "utiles",
+         * o peut supprimer le dernier rôle de la liste car c'est "ROLE_USER" qui existe pour tout le monde
+         *  et dont on a pas besoin à l'affichage
+         *
+         * unset(  $roles[ array_key_last($roles) ] );
+         */
+
+        $role = $roles[0]; // Comme on n'a qu'un seul rôle à la fois dans notre appli, on récupère le premier rôle du tableau
+
+        switch($role) {
+            case 'ROLE_CLIENT':
+                return 'Client';
+            break;
+            case 'ROLE_RESTAURATEUR':
+                return 'Restaurateur';
+            break;
+            default:
+                return 'Utilisateur';
+        }
+    }
 }

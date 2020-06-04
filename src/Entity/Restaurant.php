@@ -31,7 +31,7 @@ class Restaurant
 
     /**
      * @ORM\ManyToOne(targetEntity=OwnerInfo::class, inversedBy="restaurants")
-     * @ORM\JoinColumn(nullable=false)
+     * @ORM\JoinColumn(nullable=true)
      */
     private $owner;
 
@@ -39,6 +39,12 @@ class Restaurant
      * @ORM\OneToMany(targetEntity=Review::class, mappedBy="restaurant", orphanRemoval=true)
      */
     private $reviews;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=City::class, inversedBy="restaurants")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $city;
 
     public function __construct()
     {
@@ -113,6 +119,18 @@ class Restaurant
                 $review->setRestaurant(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getCity(): ?City
+    {
+        return $this->city;
+    }
+
+    public function setCity(?City $city): self
+    {
+        $this->city = $city;
 
         return $this;
     }
