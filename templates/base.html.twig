@@ -8,9 +8,19 @@
     </head>
     <body>
 
-        <div class="container">
+        <div class="container mt-3">
             <div class="row">
                 <div class="col">
+
+                    {% for label, messages in app.flashes %}
+                        {% for message in messages %}
+                            <div class="alert alert-{{ label }}">
+                                {{message}}
+                            </div>
+                            <hr>
+                        {% endfor %}
+                    {% endfor %}
+
                     {% block body %}{% endblock %}
                 </div>
             </div>
