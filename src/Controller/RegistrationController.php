@@ -41,6 +41,9 @@ class RegistrationController extends AbstractController
                 )
             );
 
+            $chosenRole =  $request->request->get('registration_form')['accountType'];
+            $user->setRoles([$chosenRole]);
+
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($user);
             $entityManager->flush();
